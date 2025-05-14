@@ -90,7 +90,7 @@ async function checkPaymentStatusAndUpdate(req, res)
         await userModel.findOneAndUpdate({_id: user_id}, {$addToSet: {lectures: {$each: lectures}}});
         await userModel.findOneAndUpdate({_id: user_id}, {$addToSet: {transactions: successfulTransaction[0]._id}});
         
-        return res.redirect(`http://localhost:3000/course/${course_id}`);
+        return res.redirect(`https://11cf-152-58-182-229.ngrok-free.app/${course_id}`);
     }
     catch(error)
     {
