@@ -95,7 +95,7 @@ async function checkPaymentStatusAndUpdate(req, res)
     catch(error)
     {
         console.log(error);
-        return res.redirect(`http://localhost:3000/course/${req.params.course_id}`);
+        return res.redirect(`https://11cf-152-58-182-229.ngrok-free.app/${req.params.course_id}`);
     }
 }
 
