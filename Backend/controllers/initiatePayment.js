@@ -38,7 +38,7 @@ async function initiatePayment(req, res)
 
         const merchantOrderId = crypto.randomUUID();
         const amount = courseDocument.price * 100;
-        const redirectUrl = `http://localhost:4000/api/v1/check-payment-status-and-update/${merchantOrderId}/${user._id}/${course_id}`;
+        const redirectUrl = `${process.env.BACKEND_BASE_URL}/api/v1/check-payment-status-and-update/${merchantOrderId}/${user._id}/${course_id}`;
         const metaInfo = pg_sdk_node.MetaInfo.builder()
         .udf1("udf1")
         .udf2("udf2")
