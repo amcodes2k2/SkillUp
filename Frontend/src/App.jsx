@@ -10,6 +10,7 @@ import Courses from "./Pages/Courses.jsx";
 import Lecture from "./Pages/Lecture.jsx";
 import Contact from "./Pages/Contact.jsx";
 import Earnings from "./Pages/Earnings.jsx";
+import NotFound from './Pages/NotFound.jsx';
 import Dashboard from "./Pages/Dashboard.jsx";
 import QuizMaster from "./Pages/QuizMaster.jsx";
 import VerifyEmail from "./Pages/VerifyEmail.jsx";
@@ -78,6 +79,8 @@ function App()
             <Route path="/lecture/:lecture_id" element={<Lecture></Lecture>}></Route>
           </Route>
         </Route>
+
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
 
       {
