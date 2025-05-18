@@ -74,6 +74,7 @@ async function login(req, res)
         cookie("refreshToken", refreshToken, {
             secure: true,
             httpOnly: true,
+            sameSite: "none",
             expires: new Date(Date.now() + eval(process.env.REFRESH_TOKEN_EXPIRY_MS))
         }).
         json({
