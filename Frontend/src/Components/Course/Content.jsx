@@ -11,7 +11,7 @@ function Content(props)
             </h3>
 
             {
-                course.sections.map(function(section){
+                course.sections.map(function(section, idx){
                     return(
                         <Section key={section._id} border_b={idx === course.sections.length - 1} section={section}></Section>
                     );
