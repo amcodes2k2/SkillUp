@@ -9,7 +9,7 @@ const fileupload = require("express-fileupload");
 app.use(fileupload());
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin: true, credentials: true}));
+app.use(cors({origin: [process.env.FRONTEND_BASE_URL], credentials: true}));
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running at port ${process.env.PORT}...`);
