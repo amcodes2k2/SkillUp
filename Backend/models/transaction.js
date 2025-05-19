@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const transactionSchema = new mongoose.Schema({
     pgTransactionId: {
         type: String,
+        unique: true,
         required: true
     },
     amount: {
