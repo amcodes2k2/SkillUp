@@ -21,7 +21,9 @@ async function initiatePayment(req, res)
             });
         }
 
-        if(user.courses.includes(course_id) === true)
+        if(user.courses.map(function(courseId){
+            return courseId.toString();
+        }).includes(course_id) === true)
         {
             return res.status(400).json({
                 success: false,

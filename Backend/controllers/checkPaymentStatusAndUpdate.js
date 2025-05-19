@@ -40,6 +40,12 @@ async function checkPaymentStatusAndUpdate(req, res)
         if(!courseDocument)
             return res.redirect(`${process.env.FRONTEND_BASE_URL}/course/${course_id}`);
 
+        if(userDocument.courses.map(function(courseId){
+            return courseId.toString();
+        }).
+        includes(course_id) === true)
+            return res.redirect(`${process.env.FRONTEND_BASE_URL}/course/${course_id}`);
+
         const clientId = process.env.CLIENT_ID;
         const clientSecret = process.env.CLIENT_SECRET;
         const clientVersion = process.env.CLIENT_VERSION;    
