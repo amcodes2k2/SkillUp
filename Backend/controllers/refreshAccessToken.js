@@ -12,7 +12,6 @@ async function refreshAccessToken(req, res)
             Find user in database using refresh token
             Get decoded payload using jwt verify and refresh token secret
             Generate new access token
-            Store new refresh token in DB
             Send new access token, id and role in response
         */
 
