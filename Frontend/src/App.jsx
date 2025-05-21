@@ -31,6 +31,7 @@ import { useContext } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import { Toaster } from "react-hot-toast";
+import { FadeLoader } from 'react-spinners';
 import { AppContext } from "./Context/AppContext.jsx";
 
 function App() 
@@ -93,7 +94,13 @@ function App()
       </Toaster>
     </>
     :
-    <></>
+    <div className="w-[100vw] h-[100dvh] flex items-center justify-center gap-2">
+      <FadeLoader color="white" height="15px" width="5px"></FadeLoader>
+
+      <p className="text-white font-semibold text-lg">
+        Attempting to persist login
+      </p>
+    </div>
   );
 }
 
