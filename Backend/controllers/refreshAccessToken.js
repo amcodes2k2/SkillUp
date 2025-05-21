@@ -9,12 +9,11 @@ async function refreshAccessToken(req, res)
         /*
             Fetch refresh token from cookie
             Check if refresh token is empty
+            Find user in database using refresh token
             Get decoded payload using jwt verify and refresh token secret
-            Find user in database using id in decoded payload
-            Generate new access and refresh tokens
+            Generate new access token
             Store new refresh token in DB
             Send new access token, id and role in response
-            Set new refresh token as cookie and a dummy cookie that tracks the expiry of the access token
         */
 
         const refreshToken = req?.cookies?.refreshToken;
@@ -27,11 +26,19 @@ async function refreshAccessToken(req, res)
             });
         }
 
-        const decodedPayload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-
-        const userDocument = await userModel.findOne({_id: decodedPayload._id});
+        const userDocument = await userModel.findOne({refreshToken: refreshToken});
 
         if(!userDocument)
+        {
+            return res.status(401).clearCookie("refreshToken").json({
+                success: false,
+                message: "Invalid refresh token."
+            });
+        }
+
+        const decodedPayload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+        if(decodedPayload._id.toString() !== userDocument._id.toString())
         {
             return res.status(401).clearCookie("refreshToken").json({
                 success: false,
@@ -45,16 +52,8 @@ async function refreshAccessToken(req, res)
         };
 
         const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: process.env.ACCESS_TOKEN_EXPIRY});
-        const newRefreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {expiresIn: process.env.REFRESH_TOKEN_EXPIRY});
 
-        await userModel.findOneAndUpdate({_id: userDocument._id}, {$set: {refreshToken: newRefreshToken}});
-
-        res.status(200).
-        cookie("refreshToken", newRefreshToken, {
-            secure: true,
-            httpOnly: true,
-            expires: new Date(Date.now() + eval(process.env.REFRESH_TOKEN_EXPIRY_MS))
-        })
+        res.status(200)
         .json({
             success: true,
             user: {
@@ -68,7 +67,7 @@ async function refreshAccessToken(req, res)
                 discussions: userDocument.discussions,
                 comments: userDocument.comments
             },
-            message: "Tokens have been refreshed."
+            message: "Token has been refreshed."
         });
     }
     catch(error)
