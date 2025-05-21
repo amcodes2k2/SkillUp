@@ -16,7 +16,6 @@ async function login(req, res)
             Generate access and refresh tokens
             Store refresh token in DB
             Send access token, id and role in response
-            Set refresh token as cookie and a dummy cookie that tracks the expiry of the access token
         */
 
         let {email, password} = req.body;
