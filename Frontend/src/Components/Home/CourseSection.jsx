@@ -86,11 +86,13 @@ function CourseSection()
                 }
             </div>
 
-            <Link to={`/catalog/${activeCategory}`} onClick={() => window.scrollTo(0, 0)}>
-                <button className="bg-[#CDA954] rounded-xl font-semibold text-base px-[2rem] py-[0.7rem] cursor-pointer">
-                    View more
-                </button>
-            </Link>
+            <div className="w-[100%] flex justify-center">
+                <Link to={`/catalog/${activeCategory}`} onClick={() => window.scrollTo(0, 0)}>
+                    <button className="bg-[#CDA954] rounded-xl font-semibold text-base px-[2rem] py-[0.7rem] cursor-pointer">
+                        View more
+                    </button>
+                </Link>
+            </div>
         </section>
     );
 }
