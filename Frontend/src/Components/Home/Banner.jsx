@@ -22,11 +22,13 @@ function Banner(props)
                 </p>
             </div>
 
-            <Link to={(Object.keys(userDetails).length > 0) ? "/dashboard" : "/signup"} onClick={() => window.scrollTo(0, 0)}>
-                <button className="bg-[#514ED8] cursor-pointer rounded-3xl px-[1.5rem] py-[0.7rem] flex items-center text-white font-semibold text-base">
-                    {btn}
-                </button>
-            </Link>
+            <div className="w-[100%] flex justify-center">
+                <Link to={(Object.keys(userDetails).length > 0) ? "/dashboard" : "/signup"} onClick={() => window.scrollTo(0, 0)}>
+                    <button className="bg-[#514ED8] cursor-pointer rounded-3xl px-[1.5rem] py-[0.7rem] flex items-center text-white font-semibold text-base">
+                        {btn}
+                    </button>
+                </Link>
+            </div>
         </section>
     );
 }
