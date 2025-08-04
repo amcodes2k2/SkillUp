@@ -23,10 +23,9 @@ async function postComment(req, res)
             });
         }
 
+        discussion_id = req.params.discussion_id;
         if(!lecture)
-        {
-            discussion_id = req.params.discussion_id;
-            
+        {   
             if(!mongoose.Types.ObjectId.isValid(discussion_id))
             {
                 return res.status(404).json({
