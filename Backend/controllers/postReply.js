@@ -9,10 +9,9 @@ async function postReply(req, res)
     try
     {
         const user = req.user;
-        let {content} = req.body;
-        const comment_id = req.params.comment_id;
+        let {content, comment_id} = req.body;
 
-        if(!mongoose.Types.ObjectId.isValid(comment_id))
+        if(!comment_id || !mongoose.Types.ObjectId.isValid(comment_id))
         {
             return res.status(404).json({
                 success: false,
