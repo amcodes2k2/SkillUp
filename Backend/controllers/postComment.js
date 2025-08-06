@@ -13,9 +13,6 @@ async function postComment(req, res)
         const lecture = req?.lecture;
         let {content, discussion_id} = req.body;
 
-        console.log(content);
-        console.log(discussion_id);
-
         content = content.trim();
         if(content === "")
         {
