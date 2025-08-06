@@ -14,9 +14,9 @@ const getDiscussions = require("../controllers/getDiscussions.js");
 router.get("/discussions", getDiscussions);
 
 const postComment = require("../controllers/postComment.js");
-router.post("/discussion-comment/:discussion_id", verifyJWT, postComment);
+router.post("/discussion-comment", verifyJWT, postComment);
 
 const postReply = require("../controllers/postReply.js");
-router.post("/discussion-comment-reply/:comment_id", verifyJWT, postReply);
+router.post("/discussion-comment-reply", verifyJWT, postReply);
 
 module.exports = router;
