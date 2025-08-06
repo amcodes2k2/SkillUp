@@ -10,8 +10,11 @@ async function postComment(req, res)
     try
     {
         const user = req.user;
-        let {content} = req.body;
         const lecture = req?.lecture;
+        let {content, discussion_id} = req.body;
+
+        console.log(content);
+        console.log(discussion_id);
 
         content = content.trim();
         if(content === "")
@@ -22,11 +25,9 @@ async function postComment(req, res)
             });
         }
 
-        const discussion_id = req?.params?.discussion_id;
-        
         if(!lecture)
-        {   
-            if(!mongoose.Types.ObjectId.isValid(discussion_id))
+        {
+            if(!discussion_id || !mongoose.Types.ObjectId.isValid(discussion_id))
             {
                 return res.status(404).json({
                     success: false,
